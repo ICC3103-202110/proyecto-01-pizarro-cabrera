@@ -10,15 +10,8 @@ class Coin:
     #Getters and Setters
     
     @property
-    def coin(self):
+    def quantity(self):
         return self.__quantity
-
-    @value.setter
-    def quantity(self,quantity)
-        if quantity < 0:
-            self.__quantity = 0
-        else:
-            self.__quantity = quantity
 
     #Methods
 
