@@ -1,4 +1,3 @@
-from coin import Coin
 from card import Card
 
 class Player:
