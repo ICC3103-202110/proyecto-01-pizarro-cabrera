@@ -14,11 +14,11 @@ class Deck:
     #Getters and Setters
     @property
     def cardlist(self):
-        return __cardlist
+        return self.__cardlist
 
     @cardlist.setter
     def cardlist(self):
-        return __cardlist
+        return self.__cardlist
 
     #Methods
     def build_deck(self,duke,assasin,ambassador,captain,contessa):
@@ -34,10 +34,5 @@ class Deck:
             self.__cardlist.append(contessa.name)
         random.shuffle(self.__cardlist)
 
-
-
     def draw_card(self):
-        return __cardlist.pop(__cardlist[len(__cardlist)])
- 
-    
-
+        return self.__cardlist.pop(0)

@@ -8,13 +8,12 @@ from ambassador import Ambassador
 from captain import Captain
 from contessa import Contessa
 
-
 class Game:
     NUMBER_OF_PLAYERS = 0
     __players = []
     __board = None
     __current_player = None
-    deck = Deck([])
+    __deck = Deck([])
     duke = Duke("Duke")
     assasin = Assasin("Assasin")
     ambassador = Ambassador("Ambassador")
@@ -25,8 +24,11 @@ class Game:
     def play(cls):
         cls.__set_number_of_players()
         cls.__set_players()
-        cls.deck.build_deck(cls.duke,cls.assasin,cls.ambassador,cls.captain,cls.contessa)
-     
+        cls.__deck.build_deck(cls.duke,cls.assasin,cls.ambassador,cls.captain,cls.contessa)
+        cls.__distribute_cards()
+        Console.print_options()
+
+
     @classmethod
     def __set_players(cls):
         for i in range(1, cls.NUMBER_OF_PLAYERS + 1):
@@ -46,8 +48,17 @@ class Game:
 
     @classmethod
     def __search_deck(cls):
-        for i in range(len(cls.deck.cardlist)):
-            print(cls.deck.cardlist[i])
+        for i in cls.__deck.cardlist:
+            print(i)
+
+    @classmethod
+    def __distribute_cards(cls):
+        for i in range(len(cls.__players)):
+            cls.__players[i].cards.append(cls.__deck.draw_card())
+            cls.__players[i].cards.append(cls.__deck.draw_card())
+
+
+
 
 
 

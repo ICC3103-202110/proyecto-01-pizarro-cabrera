@@ -4,10 +4,10 @@ class Player:
 
     #Constructor
     def __init__(self, name, number):
-        self.name = name
-        self.number = number
-        self.coins = 0
-        self.cards = []
+        self.__name = name
+        self.__number = number
+        self.__coins = 0
+        self.__cards = []
 
     #Getters and Setters
 
@@ -15,18 +15,13 @@ class Player:
     def name(self):
         return self.__name
 
-    @name.setter
-    def name(self, name):
-        self.__name = name
-
     @property
     def cards(self):
         return self.__cards
 
     @cards.setter
     def cards(self, cards):
-        for i in range(2):
-            cards.append(1)
+        return self.__cards
 
     @property
     def coins(self):
