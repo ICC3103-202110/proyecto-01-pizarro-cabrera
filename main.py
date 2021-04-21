@@ -2,19 +2,31 @@ from player import Player
 from duke import Duke
 from console import Console
 from deck import Deck
+from assasin import Assasin
+from duke import Duke
+from ambassador import Ambassador
+from captain import Captain
+from contessa import Contessa
+
 
 class Game:
     NUMBER_OF_PLAYERS = 0
     __players = []
     __board = None
     __current_player = None
-    
+    deck = Deck([])
+    duke = Duke("Duke")
+    assasin = Assasin("Assasin")
+    ambassador = Ambassador("Ambassador")
+    captain = Captain("Captain")
+    contessa = Contessa("Contessa")
 
     @classmethod
     def play(cls):
         cls.__set_number_of_players()
         cls.__set_players()
-        
+        cls.deck.build_deck(cls.duke,cls.assasin,cls.ambassador,cls.captain,cls.contessa)
+     
     @classmethod
     def __set_players(cls):
         for i in range(1, cls.NUMBER_OF_PLAYERS + 1):
@@ -22,7 +34,7 @@ class Game:
                 'Please enter player\'s {} name: ', [i]
             )
             cls.__players.append(Player(name, i))
-        cls.__current_player = cls.__players[0]
+        cls.__current_player = cls.__players[1]
 
     @classmethod
     def __set_number_of_players(cls):
@@ -31,6 +43,11 @@ class Game:
                 "How many players wish to play(Min=3,Max=4): "
             )
             cls.NUMBER_OF_PLAYERS = number
+
+    @classmethod
+    def __search_deck(cls):
+        for i in range(len(cls.deck.cardlist)):
+            print(cls.deck.cardlist[i])
 
 
 

@@ -10,7 +10,7 @@ class Player:
         self.cards = []
 
     #Getters and Setters
-    
+
     @property
     def name(self):
         return self.__name
