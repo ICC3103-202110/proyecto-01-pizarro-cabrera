@@ -24,10 +24,16 @@ class Console:
         return int(input("Select an action number, "+player_name+" (ex: 1): "))
 
     @staticmethod
-    def print_table(players):
+    def print_table(players,call,player_number):
         print("TABLE:")
         for i in range(len(players)):
             print(players[i].name+"'s cards: "+str(players[i].censored_cards))
+        print("React to the call: "+str(call))
+        print("1. Counteract")
+        print("2. Challenge")
+        print("3. pass")
+        return int(input(players[player_number].name+" select an option: "))
+    
 
 
 

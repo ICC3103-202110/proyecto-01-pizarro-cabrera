@@ -32,8 +32,8 @@ class Game:
         cls.__distribute_coins()
         while cls.option != True:
             n = Console.print_options(cls.players[0].name, cls.players[0].cards,cls.players[0].coins)
-            cls.__option_selec(n,cls.players[0],cls.option)
-        Console.print_table(cls.players)
+            call = cls.__option_selec(n,cls.players[0],cls.option)
+        reaction = Console.print_table(cls.players,call,1)
 
         print(cls.players[0].coins)
 
@@ -70,28 +70,29 @@ class Game:
     @classmethod
     def __option_selec(cls,n,player,option):
         if n == 1:
-            Actions.income(player)
+            call = "Income"
             cls.option = True
         if n == 2:
-            Actions.foreign_aid(player)
+            call = "Foreign Aid"
             cls.option = True
         if n == 3 and player.coins>=7:
-            Actions.coup(player)
+            call = "Coup"
             cls.option = True
         if n == 4:
-            Actions.tax(player)
+            call = "Tax"
             cls.option = True
         if n == 5 and player.coins>=3:
-            Actions.assasinate(player)
+            call = "Assasinate"
             cls.option = True
         if n == 6:
-            Actions.income(player)
+            call = "Exchange"
             cls.option = True
         if n == 7:
-            Actions.income(player)
+            call = "Steal"
             cls.option = True
         else:
             print("Insuficient funds, try again:")
+        return call
 
     @classmethod
     def __fill_censored_cards(cls):
