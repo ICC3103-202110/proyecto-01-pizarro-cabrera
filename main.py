@@ -20,16 +20,21 @@ class Game:
     ambassador = Ambassador("Ambassador")
     captain = Captain("Captain")
     contessa = Contessa("Contessa")
+    option = False
 
     @classmethod
     def play(cls):
         cls.__set_number_of_players()
         cls.__set_players()
         cls.__deck.build_deck(cls.duke,cls.assasin,cls.ambassador,cls.captain,cls.contessa)
+        cls.__fill_censored_cards()
         cls.__distribute_cards()
-        Console.print_options(cls.players[0].name, cls.players[0].cards[0], cls.players[0].cards[1])
-        Actions.tax(cls.players[0])
-        Actions.assasinate(cls.players[0])
+        cls.__distribute_coins()
+        while cls.option != True:
+            n = Console.print_options(cls.players[0].name, cls.players[0].cards,cls.players[0].coins)
+            cls.__option_selec(n,cls.players[0],cls.option)
+        Console.print_table(cls.players)
+
         print(cls.players[0].coins)
 
 
@@ -51,15 +56,48 @@ class Game:
             cls.NUMBER_OF_PLAYERS = number
 
     @classmethod
-    def __search_deck(cls):
-        for i in cls.__deck.cardlist:
-            print(i)
-
-    @classmethod
     def __distribute_cards(cls):
         for i in range(len(cls.players)):
             cls.players[i].cards.append(cls.__deck.draw_card())
             cls.players[i].cards.append(cls.__deck.draw_card())
+
+    @classmethod
+    def __distribute_coins(cls):
+        for i in range(len(cls.players)):
+            for j in range(2):
+                Actions.income(cls.players[i])
+
+    @classmethod
+    def __option_selec(cls,n,player,option):
+        if n == 1:
+            Actions.income(player)
+            cls.option = True
+        if n == 2:
+            Actions.foreign_aid(player)
+            cls.option = True
+        if n == 3 and player.coins>=7:
+            Actions.coup(player)
+            cls.option = True
+        if n == 4:
+            Actions.tax(player)
+            cls.option = True
+        if n == 5 and player.coins>=3:
+            Actions.assasinate(player)
+            cls.option = True
+        if n == 6:
+            Actions.income(player)
+            cls.option = True
+        if n == 7:
+            Actions.income(player)
+            cls.option = True
+        else:
+            print("Insuficient funds, try again:")
+
+    @classmethod
+    def __fill_censored_cards(cls):
+        for i in range(len(cls.players)):
+            cls.players[i].censored_cards.append("HIDDEN")
+            cls.players[i].censored_cards.append("HIDDEN")
 
 
 if __name__ == "__main__":

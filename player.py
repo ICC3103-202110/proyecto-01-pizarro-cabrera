@@ -8,6 +8,7 @@ class Player:
         self.__number = number
         self.__coins = 0
         self.__cards = []
+        self.__censored_cards = []
 
     #Getters and Setters
 
@@ -22,6 +23,14 @@ class Player:
     @cards.setter
     def cards(self, cards):
         return self.__cards
+
+    @property
+    def censored_cards(self):
+        return self.__censored_cards
+
+    @censored_cards.setter
+    def censored_cards(self, censored_cards):
+        return self.__censored_cards
 
     @property
     def coins(self):
