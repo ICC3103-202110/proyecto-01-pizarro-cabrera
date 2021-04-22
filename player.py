@@ -34,3 +34,10 @@ class Player:
         else:
             self.__coins = 0
 
+    #Methods
+    def add_coin(self):
+        self.__coins += 1
+
+    def substract_coin(self):
+        self.__coins -= 1
+

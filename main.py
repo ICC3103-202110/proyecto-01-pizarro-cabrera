@@ -7,10 +7,11 @@ from duke import Duke
 from ambassador import Ambassador
 from captain import Captain
 from contessa import Contessa
+from actions import Actions
 
 class Game:
     NUMBER_OF_PLAYERS = 0
-    __players = []
+    players = []
     __board = None
     __current_player = None
     __deck = Deck([])
@@ -26,7 +27,10 @@ class Game:
         cls.__set_players()
         cls.__deck.build_deck(cls.duke,cls.assasin,cls.ambassador,cls.captain,cls.contessa)
         cls.__distribute_cards()
-        Console.print_options()
+        Console.print_options(cls.players[0].name, cls.players[0].cards[0], cls.players[0].cards[1])
+        Actions.tax(cls.players[0])
+        Actions.assasinate(cls.players[0])
+        print(cls.players[0].coins)
 
 
     @classmethod
@@ -35,8 +39,8 @@ class Game:
             name = Console.get_str_input_with_args(
                 'Please enter player\'s {} name: ', [i]
             )
-            cls.__players.append(Player(name, i))
-        cls.__current_player = cls.__players[1]
+            cls.players.append(Player(name, i))
+        cls.__current_player = cls.players[1]
 
     @classmethod
     def __set_number_of_players(cls):
@@ -53,13 +57,9 @@ class Game:
 
     @classmethod
     def __distribute_cards(cls):
-        for i in range(len(cls.__players)):
-            cls.__players[i].cards.append(cls.__deck.draw_card())
-            cls.__players[i].cards.append(cls.__deck.draw_card())
-
-
-
-
+        for i in range(len(cls.players)):
+            cls.players[i].cards.append(cls.__deck.draw_card())
+            cls.players[i].cards.append(cls.__deck.draw_card())
 
 
 if __name__ == "__main__":

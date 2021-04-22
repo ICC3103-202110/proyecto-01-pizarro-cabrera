@@ -29,9 +29,4 @@ class Card:
     def hidden(self, hidden):
         self.__hidden = hidden
 
-    #Methods
-
-    def action():
-        pass
-
 
