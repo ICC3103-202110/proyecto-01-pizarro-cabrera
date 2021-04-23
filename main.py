@@ -55,6 +55,7 @@ class Game:
                         Console.print_table(cls.players,call,3)
                         cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
                     cls.__execute_action(call,i)
+                    cls.__check_coins_10()
         
                 if i == 1:
                     Console.print_table(cls.players,call,2)
@@ -65,6 +66,7 @@ class Game:
                     Console.print_table(cls.players,call,0)
                     cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
                     cls.__execute_action(call,i)
+                    cls.__check_coins_10()
 
                 if i == 2:
                     if len(cls.players) == 4:
@@ -75,6 +77,7 @@ class Game:
                     Console.print_table(cls.players,call,1)
                     cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
                     cls.__execute_action(call,i)
+                    cls.__check_coins_10()
 
                 if len(cls.players) == 4:
                     if i == 3:
@@ -85,6 +88,7 @@ class Game:
                         Console.print_table(cls.players,call,2)
                         cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
                         cls.__execute_action(call,i)
+                        cls.__check_coins_10()
 
                 cls.option = False
             
@@ -185,6 +189,12 @@ class Game:
         if call == "Assasinate":
             Actions.assasinate(cls.players,i)
 
+    @classmethod
+    def __check_coins_10(cls):
+        for i in range(len(cls.players)):
+                if cls.players[i].coins >= 10:
+                    print(cls.players[i].name+ " has more than 10 coins obligatory coup!")
+                    Actions.coup(cls.players,i)
 
 if __name__ == "__main__":
     Game.play()

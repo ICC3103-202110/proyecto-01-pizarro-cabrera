@@ -20,7 +20,7 @@ class Actions:
         if players[0].name == victim:
             print(victim+"'s cards:")
             print(str(players[0].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[0].censored_cards:
                 n = players[0].censored_cards.index("HIDDEN")
 
@@ -29,7 +29,7 @@ class Actions:
         if players[1].name == victim:
             print(victim+"'s cards:")
             print(str(players[1].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[1].censored_cards:
                 n = players[1].censored_cards.index("HIDDEN")
 
@@ -38,7 +38,7 @@ class Actions:
         if players[2].name == victim:
             print(victim+"'s cards:")
             print(str(players[2].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[2].censored_cards:
                 n = players[2].censored_cards.index("HIDDEN")
 
@@ -48,7 +48,7 @@ class Actions:
             if players[3].name == victim:
                 print(victim+"'s cards:")
                 print(str(players[3].cards))
-                card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+                card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
                 if "HIDDEN" in players[3].censored_cards:
                     n = players[3].censored_cards.index("HIDDEN")
 
@@ -69,7 +69,7 @@ class Actions:
         if players[0].name == victim:
             print(victim+"'s cards:")
             print(str(players[0].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[0].censored_cards:
                 n = players[0].censored_cards.index("HIDDEN")
 
@@ -78,7 +78,7 @@ class Actions:
         if players[1].name == victim:
             print(victim+"'s cards:")
             print(str(players[1].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[1].censored_cards:
                 n = players[1].censored_cards.index("HIDDEN")
 
@@ -87,7 +87,7 @@ class Actions:
         if players[2].name == victim:
             print(victim+"'s cards:")
             print(str(players[2].cards))
-            card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+            card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
             if "HIDDEN" in players[2].censored_cards:
                 n = players[2].censored_cards.index("HIDDEN")
 
@@ -97,7 +97,7 @@ class Actions:
             if players[3].name == victim:
                 print(victim+"'s cards:")
                 print(str(players[3].cards))
-                card = input("Wich influence do wish to lose,"+victim+" (ex: Duke): ")
+                card = input("Wich influence do wish to lose, "+victim+" (ex: Duke): ")
                 if "HIDDEN" in players[3].censored_cards:
                     n = players[3].censored_cards.index("HIDDEN")
 
