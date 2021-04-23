@@ -50,7 +50,8 @@ class Game:
                 cls.__check_if_challenge(i,2)
                 if len(cls.players) == 4:
                     Console.print_table(cls.players,call,3)
-                    cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))       
+                    cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+                cls.__execute_action(call,i)
      
             if i == 1:
                 Console.print_table(cls.players,call,2)
@@ -60,6 +61,7 @@ class Game:
                     cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
                 Console.print_table(cls.players,call,0)
                 cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+                cls.__execute_action(call,i)
 
             if i == 2:
                 if len(cls.players) == 4:
@@ -69,7 +71,8 @@ class Game:
                 cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
                 Console.print_table(cls.players,call,1)
                 cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
-            
+                cls.__execute_action(call,i)
+
             if len(cls.players) == 4:
                 if i == 3:
                     Console.print_table(cls.players,call,0)
@@ -78,7 +81,8 @@ class Game:
                     cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
                     Console.print_table(cls.players,call,2)
                     cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
-            
+                    cls.__execute_action(call,i)
+
             cls.option = False
 
 
@@ -109,7 +113,7 @@ class Game:
     def __distribute_coins(cls):
         for i in range(len(cls.players)):
             for j in range(2):
-                Actions.income(cls.players[i])
+                Actions.income(cls.players,i)
 
     @classmethod
     def __option_selec(cls,n,player,option):
@@ -162,8 +166,18 @@ class Game:
             print(cls.players[j].name+" challenged "+cls.players[i].name+"!")
             Challenge.challenge(cls.players,i,j)
 
-
-
+    @classmethod
+    def __execute_action(cls,call,i):
+        if call == "Income":
+            Actions.income(cls.players,i)
+        if call == "Foreign aid":
+            Actions.foreign_aid(cls.players,i)
+        if call == "Coup":
+            Actions.coup(cls.players,i)
+        if call == "Tax":
+            Actions.tax(cls.players,i)
+        if call == "Assasinate":
+            Actions.assasinate(cls.players,i)
 
 
 if __name__ == "__main__":
