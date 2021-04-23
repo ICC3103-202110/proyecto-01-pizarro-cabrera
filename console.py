@@ -11,7 +11,7 @@ class Console:
 
     @staticmethod
     def print_options3(players,i):
-        print("ACTIONS:")
+        print("ACTIONS:            "+players[i].name+"'s Cards: "+str(players[2].cards)+"")
         print("General Actions:    "+players[0].name+"'s Coins: "+str(players[0].coins)+"")
         print("1. Income           "+players[1].name+"'s Coins: "+str(players[1].coins)+"")
         print("2. Foreign Aid      "+players[2].name+"'s Coins: "+str(players[2].coins)+"")

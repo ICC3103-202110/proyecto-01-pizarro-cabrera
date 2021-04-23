@@ -68,3 +68,6 @@ class Player:
 
     def set_action(self, action):
         self.__action = action
+
+    def set_censored_card(self, n, card):
+        self.__censored_cards[n] = card
