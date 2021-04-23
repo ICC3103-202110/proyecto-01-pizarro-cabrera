@@ -44,10 +44,10 @@ class Game:
             if i == 0:
                 Console.print_table(cls.players,call,1)
                 cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
-                cls.__check_if_challenge(i)
+                cls.__check_if_challenge(1,i)
                 Console.print_table(cls.players,call,2)
                 cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
-                cls.__check_if_challenge(i)
+                cls.__check_if_challenge(2,i)
                 if len(cls.players) == 4:
                     Console.print_table(cls.players,call,3)
                     cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))       
@@ -157,9 +157,9 @@ class Game:
             cls.players[i].censored_cards.append("HIDDEN")
 
     @classmethod
-    def __check_if_challenge(cls,i):
-        if cls.players[i].reaction == 2:
-            Challenge.challenge(players[i],i)
+    def __check_if_challenge(cls,i,j):
+        if cls.players[j].reaction == 2:
+            Challenge.challenge(cls.players,i)
 
 
 

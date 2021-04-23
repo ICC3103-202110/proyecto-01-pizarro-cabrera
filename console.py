@@ -11,14 +11,14 @@ class Console:
 
     @staticmethod
     def print_options3(players,i):
-        print("ACTIONS:    "+players[i].name+"'s Cards: "+str(players[i].cards)+"")
+        print("ACTIONS:")
         print("General Actions:    "+players[0].name+"'s Coins: "+str(players[0].coins)+"")
         print("1. Income           "+players[1].name+"'s Coins: "+str(players[1].coins)+"")
         print("2. Foreign Aid      "+players[2].name+"'s Coins: "+str(players[2].coins)+"")
         print("3. Coup")
-        print("Card Actions:")
-        print("4. Tax")
-        print("5. Assasinate")
+        print("Card Actions         "+players[0].name+"'s Cards: "+str(players[0].censored_cards)+"")
+        print("4. Tax               "+players[1].name+"'s Cards: "+str(players[1].censored_cards)+"")
+        print("5. Assasinate        "+players[2].name+"'s Cards: "+str(players[2].censored_cards)+"")
         print("6. Exchange")
         print("7. Steal")
 
@@ -39,10 +39,10 @@ class Console:
         print("1. Income           "+players[1].name+"'s Coins: "+str(players[1].coins)+"")
         print("2. Foreign Aid      "+players[2].name+"'s Coins: "+str(players[2].coins)+"")
         print("3. Coup             "+players[3].name+"'s Coins: "+str(players[3].coins)+"")
-        print("Card Actions:")
-        print("4. Tax")
-        print("5. Assasinate")
-        print("6. Exchange")
+        print("Card Actions:        "+players[0].name+"'s Cards: "+str(players[0].censored_cards)+"")
+        print("4. Tax               "+players[1].name+"'s Cards: "+str(players[1].censored_cards)+"")
+        print("5. Assasinate        "+players[2].name+"'s Cards: "+str(players[2].censored_cards)+"")
+        print("6. Exchange          "+players[3].name+"'s Cards: "+str(players[3].censored_cards)+"")
         print("7. Steal")
 
     
