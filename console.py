@@ -10,11 +10,11 @@ class Console:
         return int(input(message))
 
     @staticmethod
-    def print_options(player_name,cards,player_coins):
-        print("ACTIONS:    "+player_name+"'s Cards: "+str(cards)+"")
-        print("General Actions:    "+player_name+"'s Coins: "+str(player_coins)+"")
-        print("1. Income")
-        print("2. Foreign Aid")
+    def print_options3(players,i):
+        print("ACTIONS:    "+players[i].name+"'s Cards: "+str(players[i].cards)+"")
+        print("General Actions:    "+players[0].name+"'s Coins: "+str(players[0].coins)+"")
+        print("1. Income           "+players[1].name+"'s Coins: "+str(players[1].coins)+"")
+        print("2. Foreign Aid      "+players[2].name+"'s Coins: "+str(players[2].coins)+"")
         print("3. Coup")
         print("Card Actions:")
         print("4. Tax")
@@ -31,6 +31,23 @@ class Console:
         print("1. Counteract")
         print("2. Challenge")
         print("3. pass")
+
+    @staticmethod
+    def print_options4(players,i):
+        print("ACTIONS:    "+players[i].name+"'s Cards: "+str(players[i].cards)+"")
+        print("General Actions:    "+players[0].name+"'s Coins: "+str(players[0].coins)+"")
+        print("1. Income           "+players[1].name+"'s Coins: "+str(players[1].coins)+"")
+        print("2. Foreign Aid      "+players[2].name+"'s Coins: "+str(players[2].coins)+"")
+        print("3. Coup             "+players[3].name+"'s Coins: "+str(players[3].coins)+"")
+        print("Card Actions:")
+        print("4. Tax")
+        print("5. Assasinate")
+        print("6. Exchange")
+        print("7. Steal")
+
+    
+
+    
     
 
 

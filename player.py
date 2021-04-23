@@ -6,6 +6,8 @@ class Player:
     def __init__(self, name, number):
         self.__name = name
         self.__number = number
+        self.__action = ""
+        self.__reaction = ""
         self.__coins = 0
         self.__cards = []
         self.__censored_cards = []
@@ -23,6 +25,14 @@ class Player:
     @cards.setter
     def cards(self, cards):
         return self.__cards
+
+    @property
+    def reaction(self):
+        return self.__reaction
+
+    @property
+    def action(self):
+        return self.__action
 
     @property
     def censored_cards(self):
@@ -50,3 +60,11 @@ class Player:
     def substract_coin(self):
         self.__coins -= 1
 
+    def set_reaction(self, reaction):
+        self.__reaction = reaction
+
+    def lose_card(self,):
+        self.__cards.pop()
+
+    def set_action(self, action):
+        self.__action = action
