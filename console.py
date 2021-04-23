@@ -21,7 +21,6 @@ class Console:
         print("5. Assasinate")
         print("6. Exchange")
         print("7. Steal")
-        return int(input("Select an action number, "+player_name+" (ex: 1): "))
 
     @staticmethod
     def print_table(players,call,player_number):
@@ -32,7 +31,6 @@ class Console:
         print("1. Counteract")
         print("2. Challenge")
         print("3. pass")
-        return int(input(players[player_number].name+" select an option: "))
     
 
 
