@@ -11,8 +11,10 @@ class Challenge:
             print(players[j].name+" loses the challenge!")
             print(str(players[j].cards))
             card = input("Select an influence you wish to lose: ")
-            if "Hidden" in players[j].censored_cards:
-                n = players[j].censored_cards.index("Hidden")
+            print(card)
+            if "HIDDEN" in players[j].censored_cards:
+                n = players[j].censored_cards.index("HIDDEN")
+                print(n)
                 players[j].set_censored_card(n,card)
 
         else:
@@ -20,9 +22,11 @@ class Challenge:
             print(players[i].name+" loses the challenge!")
             print(players[i].name+"'s cards:")
             print(str(players[i].cards))
-            card = input("Select an influence you wish to lose: ")
-            if "Hidden" in players[i].censored_cards:
-                n = players[i].censored_cards.index("Hidden")
+            card = input("Select an influence you wish to lose(ex: Duke): ")
+            print(card)
+            if "HIDDEN" in players[i].censored_cards:
+                n = players[i].censored_cards.index("HIDDEN")
+                print(n)
                 players[i].set_censored_card(n,card)
             
                 
