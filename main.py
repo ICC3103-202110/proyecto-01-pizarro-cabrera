@@ -48,6 +48,7 @@ class Game:
                         Console.print_options4(cls.players,i)
                     n = Console.get_int_input("Select an action number, "+cls.players[i].name+" (ex: 1): ")
                     call = cls.__option_selec(n,cls.players[i],cls.option,i)
+            
 
                 cls.actions.current_action_true()
                 cls.__react(i,call)
@@ -55,8 +56,8 @@ class Game:
                 if cls.actions.current_action == True:
                     print("Action done Succesfully")
                     cls.__execute_action(call,i)
-
-                cls.__check_coins_10
+                    cls.__check_coins_10()
+                
                 cls.actions.current_action_false()
                 cls.option = False
             
