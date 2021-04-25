@@ -56,11 +56,10 @@ class Game:
                     print("Action done Succesfully")
                     cls.__execute_action(call,i)
 
+                cls.__check_coins_10
                 cls.actions.current_action_false()
                 cls.option = False
             
-            if (cls.players[0].censored_cards[0] and cls.players[0].censored_cards[1]) != "HIDDEN":
-                cls.win = True
 
     @classmethod
     def __number_of_players_in_game(cls):
