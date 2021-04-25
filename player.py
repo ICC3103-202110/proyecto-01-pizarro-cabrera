@@ -11,8 +11,13 @@ class Player:
         self.__coins = 0
         self.__cards = []
         self.__censored_cards = []
+        self.__in_game = True
 
     #Getters and Setters
+
+    @property
+    def in_game(self):
+        return self.__in_game
 
     @property
     def name(self):
@@ -71,3 +76,7 @@ class Player:
 
     def set_censored_card(self, n, card):
         self.__censored_cards[n] = card
+
+    def out_of_game(self,censored_cards):
+        if "HIDDEN" not in self.__censored_cards:
+            self.__in_game = False

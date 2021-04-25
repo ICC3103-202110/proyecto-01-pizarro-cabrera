@@ -1,6 +1,19 @@
 from player import Player
 
 class Actions:
+    def __init__(self):
+        self.__current_action = False
+
+    @property
+    def current_action(self):
+        return self.__current_action
+
+    #Methods
+    def current_action_true(self):
+        self.__current_action = True
+
+    def current_action_false(self):
+        self.__current_action = False
 
     @staticmethod
     def income(players,i):

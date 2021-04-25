@@ -14,6 +14,7 @@ class Game:
     NUMBER_OF_PLAYERS = 0
     players = []
     reactions = []
+    actions = Actions()
     __board = None
     __current_player = None
     __deck = Deck([])
@@ -33,67 +34,44 @@ class Game:
         cls.__fill_censored_cards()
         cls.__distribute_cards()
         cls.__distribute_coins()
+        in_game_players = cls.__number_of_players_in_game()
 
-        while cls.win != True:
-            for i in range(len(cls.players)):
+        while in_game_players != 1:
+
+            for i in range(in_game_players):
                 while cls.option != True:
+                    if len(cls.players)==2:
+                        Console.print_options2(cls.players,i)
                     if len(cls.players)==3:
                         Console.print_options3(cls.players,i)
                     if len(cls.players)==4:
                         Console.print_options4(cls.players,i)
                     n = Console.get_int_input("Select an action number, "+cls.players[i].name+" (ex: 1): ")
-                    call = cls.__option_selec(n,cls.players[i],cls.option)
+                    call = cls.__option_selec(n,cls.players[i],cls.option,i)
 
-                if i == 0:
-                    Console.print_table(cls.players,call,1)
-                    cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
-                    cls.__check_if_challenge(i,1)
-                    Console.print_table(cls.players,call,2)
-                    cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
-                    cls.__check_if_challenge(i,2)
-                    if len(cls.players) == 4:
-                        Console.print_table(cls.players,call,3)
-                        cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+                cls.actions.current_action_true()
+                cls.__react(i,call)
+                cls.__check_reactions(i)
+                if cls.actions.current_action == True:
+                    print("Action done Succesfully")
                     cls.__execute_action(call,i)
-                    cls.__check_coins_10()
-        
-                if i == 1:
-                    Console.print_table(cls.players,call,2)
-                    cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
-                    if len(cls.players) == 4:
-                        Console.print_table(cls.players,call,3)
-                        cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
-                    Console.print_table(cls.players,call,0)
-                    cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
-                    cls.__execute_action(call,i)
-                    cls.__check_coins_10()
 
-                if i == 2:
-                    if len(cls.players) == 4:
-                        Console.print_table(cls.players,call,3)
-                        cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
-                    Console.print_table(cls.players,call,0)
-                    cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
-                    Console.print_table(cls.players,call,1)
-                    cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
-                    cls.__execute_action(call,i)
-                    cls.__check_coins_10()
-
-                if len(cls.players) == 4:
-                    if i == 3:
-                        Console.print_table(cls.players,call,0)
-                        cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
-                        Console.print_table(cls.players,call,1)
-                        cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
-                        Console.print_table(cls.players,call,2)
-                        cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
-                        cls.__execute_action(call,i)
-                        cls.__check_coins_10()
-
+                cls.actions.current_action_false()
                 cls.option = False
             
             if (cls.players[0].censored_cards[0] and cls.players[0].censored_cards[1]) != "HIDDEN":
                 cls.win = True
+
+    @classmethod
+    def __number_of_players_in_game(cls):
+        counter = 0
+        for i in range(len(cls.players)):
+            if cls.players[i].in_game == True:
+                counter += 1
+        return counter
+        
+
+
 
 
     @classmethod
@@ -126,7 +104,7 @@ class Game:
                 Actions.income(cls.players,i)
 
     @classmethod
-    def __option_selec(cls,n,player,option):
+    def __option_selec(cls,n,player,option,i):
         if n == 1:
             call = "Income"
             cls.option = True
@@ -134,6 +112,7 @@ class Game:
         if n == 2:
             call = "Foreign Aid"
             cls.option = True
+            cls.__react(i,call)
             return call
         if n == 3 and player.coins>=7:
             call = "Coup"
@@ -195,6 +174,176 @@ class Game:
                 if cls.players[i].coins >= 10:
                     print(cls.players[i].name+ " has more than 10 coins obligatory coup!")
                     Actions.coup(cls.players,i)
+
+    @classmethod
+    def __react(cls,i,call):
+        if i == 0:
+            Console.print_table(cls.players,call,1)
+            cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+            Console.print_table(cls.players,call,2)
+            cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+            if len(cls.players) == 4:
+                Console.print_table(cls.players,call,3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+        if i == 1:
+            Console.print_table(cls.players,call,2)
+            cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+            if len(cls.players) == 4:
+                Console.print_table(cls.players,call,3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+            Console.print_table(cls.players,call,0)
+            cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+        if i == 2:
+            if len(cls.players) == 4:
+                Console.print_table(cls.players,call,3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+            Console.print_table(cls.players,call,0)
+            cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+            Console.print_table(cls.players,call,1)
+            cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+        if len(cls.players) == 4:
+            if i == 3:
+                Console.print_table(cls.players,call,0)
+                cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+                Console.print_table(cls.players,call,1)
+                cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+                Console.print_table(cls.players,call,2)
+                cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+
+    @classmethod
+    def __reacto_to_ca(cls,i):
+        if i == 0:
+            Console.print_react_to_ca(cls.players, 1)
+            cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+            Console.print_react_to_ca(cls.players, 2)
+            cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+            if len(cls.players)==4:
+                Console.print_react_to_ca(cls.players, 3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+        if i == 1:
+            Console.print_react_to_ca(cls.players, 2)
+            cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+            if len(cls.players)==4:
+                Console.print_react_to_ca(cls.players, 3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+            Console.print_react_to_ca(cls.players, 0)
+            cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+
+        if i == 2:
+            if len(cls.players)==4:
+                Console.print_react_to_ca(cls.players, 3)
+                cls.players[3].set_reaction(Console.get_int_input(cls.players[3].name+" select an option: "))
+            Console.print_react_to_ca(cls.players, 0)
+            cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+            Console.print_react_to_ca(cls.players, 1)
+            cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+
+        if len(cls.players)==4:
+            if i == 3:
+                Console.print_react_to_ca(cls.players, 0)
+                cls.players[0].set_reaction(Console.get_int_input(cls.players[0].name+" select an option: "))
+                Console.print_react_to_ca(cls.players, 1)
+                cls.players[1].set_reaction(Console.get_int_input(cls.players[1].name+" select an option: "))
+                Console.print_react_to_ca(cls.players, 2)
+                cls.players[2].set_reaction(Console.get_int_input(cls.players[2].name+" select an option: "))
+
+    @classmethod
+    def __check_reactions(cls,i):
+        reactions = []
+        j = 0
+        m = 0
+        if i == 0:
+            reactions.append(cls.players[1].reaction)
+            reactions.append(cls.players[2].reaction)
+            if len(cls.players)==4:
+                reactions.append(cls.players[3].reaction)
+            if cls.players[1].reaction == 2:
+                j = 1
+            if cls.players[2].reaction == 2:
+                j = 2
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 2:
+                    j = 3
+            if cls.players[1].reaction == 1:
+                m = 1
+            if cls.players[2].reaction == 1:
+                m = 2
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 1:
+                    m = 3
+
+
+        if i == 1:
+            reactions.append(cls.players[0].reaction)
+            reactions.append(cls.players[2].reaction)
+            if len(cls.players)==4:
+                reactions.append(cls.players[3].reaction)
+            if cls.players[0].reaction == 2:
+                j = 0
+            if cls.players[2].reaction == 2:
+                j = 2
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 2:
+                    j = 3
+            if cls.players[0].reaction == 1:
+                m = 0
+            if cls.players[2].reaction == 1:
+                m = 2
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 1:
+                    m = 3
+
+
+        if i == 2:
+            reactions.append(cls.players[1].reaction)           
+            reactions.append(cls.players[0].reaction)
+            if len(cls.players)==4:
+                reactions.append(cls.players[3].reaction)
+            if cls.players[1].reaction == 2:
+                j = 1
+            if cls.players[0].reaction == 2:
+                j = 0
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 2:
+                    j = 3
+            if cls.players[1].reaction == 1:
+                m = 1
+            if cls.players[0].reaction == 1:
+                m = 0
+            if len(cls.players)==4:
+                if cls.players[3].reaction == 1:
+                    m = 3
+        
+        if len(cls.players) == 4:
+            if i == 3:
+                reactions.append(cls.players[1].reaction)
+                reactions.append(cls.players[2].reaction)
+                reactions.append(cls.players[0].reaction)
+                if cls.players[1].reaction == 2:
+                    j = 1
+                if cls.players[2].reaction == 2:
+                    j = 2
+                if cls.players[0].reaction == 2:
+                    j = 0
+            if cls.players[1].reaction == 1:
+                m = 1
+            if cls.players[2].reaction == 1:
+                m = 2
+            if len(cls.players)==4:
+                if cls.players[0].reaction == 1:
+                    m = 0
+
+        if 2 in reactions:
+            print(cls.players[j].name+" challenged "+cls.players[i].name+"!")
+            Challenge.challenge(cls.players,i,j)
+
+        if (1 in reactions) and (2 not in reactions):
+            print(cls.players[m].name+" counteracted "+cls.players[i].name+"!")
+            cls.__reacto_to_ca(m)
+            print("Counteraction done succesfully")
+            cls.actions.current_action_false()
+
+
 
 if __name__ == "__main__":
     Game.play()
